@@ -1,25 +1,282 @@
-<!doctype html>
-<html>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>CS208 - Starter Code (UPDATE ME)!</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting Lineup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+ 
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+ 
+        h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+ 
+        p {
+            margin-bottom: 25px;
+        }
+ 
+        fieldset {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+ 
+        legend {
+            font-weight: 600;
+            color: #555;
+            padding: 0 10px;
+            font-size: 0.95em;
+        }
+ 
+        label {
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+ 
+        label:hover {
+            color: #667eea;
+        }
+ 
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+ 
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+ 
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+ 
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+ 
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 10px;
+        }
+ 
+        input[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+ 
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+ 
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+ 
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+ 
+        #result.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+ 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ 
+        #result h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+ 
+        #result p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
 </head>
-
 <body>
-  <h1>HTML Rocks!!</h1>
-  <ul>
-  <li><a href="/hello">Click here to say hello</a></li>
-  <li><button id="hello-link">Click Me!</button></li>
-  <li><button id="joke-button">Dad Joke!</button></li>
-  <script src="script.js"></script>
-  </ul>
-  <img src="funny.png" alt="Funny Image" width="300" height="200">
-
-  <h2 id="joke-display"></h2>
+    <div class="container">
+        <h1>Starting Lineup</h1>
+        
+        <form id="lineupForm">
+            <p>
+                <fieldset>
+                    <legend>Status:</legend>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="status" value="Draft"> Draft
+                        </label>
+                        <label>
+                            <input type="radio" name="status" value="Final" checked> Final
+                        </label>
+                    </div>
+                </fieldset>
+            </p>
+ 
+            <p>
+                <label for="gameDate">Date:</label>
+                <select name="gameDate" id="gameDate">
+                    <option value="March 20">March 20</option>
+                    <option value="March 24">March 24</option>
+                    <option value="April 2">April 2</option>
+                    <option value="April 6">April 6</option>
+                    <option value="April 13">April 13</option>
+                </select>
+            </p>
+ 
+            <p>
+                <fieldset>
+                    <legend>Players:</legend>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="player" value="Aarav Agarwal"> Aarav Agarwal
+                        </label>
+                        <label>
+                            <input type="checkbox" name="player" value="Ava Johnson"> Ava Johnson
+                        </label>
+                        <label>
+                            <input type="checkbox" name="player" value="Julio Ortiz"> Julio Ortiz
+                        </label>
+                        <label>
+                            <input type="checkbox" name="player" value="Liam Rubio"> Liam Rubio
+                        </label>
+                        <label>
+                            <input type="checkbox" name="player" value="Emma Witherspoon"> Emma Witherspoon
+                        </label>
+                    </div>
+                </fieldset>
+            </p>
+ 
+            <input type="submit" value="Submit">
+        </form>
+ 
+        <div id="result"></div>
+    </div>
+ 
+    <script>
+        // Get the submit button and add event listener
+        const form = document.getElementById('lineupForm');
+        const submitButton = form.querySelector('input[type="submit"]');
+        
+        submitButton.addEventListener('click', myLineUp);
+ 
+        function myLineUp(event) {
+            event.preventDefault(); // Prevent form from actually submitting
+            
+            // Get form data
+            const formData = new FormData(form);
+            
+            // Get status (radio button)
+            const status = formData.get('status');
+            
+            // Get game date
+            const gameDate = formData.get('gameDate');
+            
+            // Get all selected players (checkboxes)
+            const players = formData.getAll('player');
+            
+            // Print to console
+            console.log('=== LINEUP DATA ===');
+            console.log('Status:', status);
+            console.log('Game Date:', gameDate);
+            console.log('Players:', players);
+            console.log('Number of Players Selected:', players.length);
+            console.log('===================');
+            
+            // Concatenate all information into one string
+            let resultString = `<h2>Lineup Summary</h2>`;
+            resultString += `<p><strong>Status:</strong> ${status}</p>`;
+            resultString += `<p><strong>Game Date:</strong> ${gameDate}</p>`;
+            resultString += `<p><strong>Selected Players:</strong></p>`;
+            
+            if (players.length > 0) {
+                resultString += '<ul>';
+                players.forEach(player => {
+                    resultString += `<li>${player}</li>`;
+                });
+                resultString += '</ul>';
+            } else {
+                resultString += '<p><em>No players selected</em></p>';
+            }
+            
+            // Display on webpage
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = resultString;
+            resultDiv.classList.add('show');
+        }
+    </script>
 </body>
-
 </html>
+ 
+
+
